@@ -1,1 +1,1 @@
-"# ResourceCalculator" 
+# ResourceCalculator
