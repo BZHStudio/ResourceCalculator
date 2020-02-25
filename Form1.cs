@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace ResourceCalculator
 {
@@ -46,6 +47,8 @@ namespace ResourceCalculator
                 Button1.ForeColor = Color.FromArgb(255, 255, 255, 255);
                 ButtonClean.BackColor = Color.FromArgb(255, 29, 29, 29);
                 ButtonClean.ForeColor = Color.FromArgb(255, 255, 255, 255);
+                ButtonAllResult.BackColor = Color.FromArgb(255, 29, 29, 29);
+                ButtonAllResult.ForeColor = Color.FromArgb(255, 255, 255, 255);
 
                 ComboBox1.BackColor = Color.FromArgb(255, 29, 29, 29);
                 ComboBox1.ForeColor = Color.FromArgb(255, 245, 245, 245);
@@ -73,6 +76,8 @@ namespace ResourceCalculator
 
                 Button1.BackColor = SystemColors.Control;
                 Button1.ForeColor = SystemColors.ControlText;
+                ButtonAllResult.BackColor = SystemColors.Control;
+                ButtonAllResult.ForeColor = SystemColors.ControlText;
 
                 menuStrip1.BackColor = SystemColors.Control;
                 настройкиToolStripMenuItem.ForeColor = SystemColors.ControlText;
@@ -81,16 +86,16 @@ namespace ResourceCalculator
 
             if (File.Exists("ResourceCalculatorOldVersion.exe"))
             {
-               // MessageBox.Show("Файл найден!");
+                // MessageBox.Show("Файл найден!");
                 File.Delete("ResourceCalculatorOldVersion.exe");
             }
             else
             {
-               // MessageBox.Show("Файл не найден!");
+              // MessageBox.Show("Файл не найден!");
             }
+
         }
 
-        //public static string versionProg = "1.0.0.1";
         public static string versionProg = Application.ProductVersion;
 
         private void ОпрограммеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -104,26 +109,28 @@ namespace ResourceCalculator
         {
             Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator").SetValue("DarkMode", "true");
             checkBoxDarkMode.Checked = true;
+            Application.Restart();
         }
 
         private void светлаяToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator").SetValue("DarkMode", "false");
             checkBoxDarkMode.Checked = false;
+            Application.Restart();
         }
         
         private void проверитьОбновленияToolStripMenuItem_Click(object sender, EventArgs e)
         {
             WebClient wc = new WebClient();
 
-            var Ui = wc.DownloadString("http://atas.kl.com.ua/updater/ver.txt");
+            var Ui = wc.DownloadString("https://raw.githubusercontent.com/BZHStudio/ResourceCalculator/master/version.txt");
             if (Ui.Contains(versionProg))
             {
                 MessageBox.Show("У вас установлена последняя версия программы!", "Обновления не найдены", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-               if (MessageBox.Show("Новое обновление доступно " + Ui + " хотите обновить?", "Найдено новое обновление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (MessageBox.Show("Новое обновление доступно " + Ui + " хотите обновить?", "Найдено новое обновление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     Updater upd = new Updater();
 
@@ -183,7 +190,9 @@ namespace ResourceCalculator
 
             if (ComboBox1.Text == "1 -> 3")
             {
-                LabelResult3.Text = (Convert.ToInt32(TextBox1.Text) / 50 / 50).ToString();
+                TextBox1.Text = (Convert.ToInt32(TextBox1.Text) / 50).ToString();
+                LabelResult2.Text = (Convert.ToInt32(TextBox1.Text) / 50 / 50).ToString();
+                LabelResult3.Text = LabelResult2.Text + LabelResult3.Text;
             }
 
             if (ComboBox1.Text == "1 -> 4")
@@ -214,6 +223,17 @@ namespace ResourceCalculator
             TextBox3.Text = null;
             TextBox4.Text = null;
             TextBox5.Text = null;
+        }
+
+        private void ButtonAllResult_Click(object sender, EventArgs e)
+        {
+            if (TextBox1.Text == "" || TextBox2.Text == "" || TextBox3.Text == "" || TextBox4.Text == "" || TextBox5.Text == "") {
+                MessageBox.Show("Заполните все поля!", "Поля не заполнены");
+            } else
+            {
+                var ResultAll = ((Convert.ToInt32(TextBox1.Text) / 50) + (Convert.ToInt32(TextBox2.Text) / 50) + (Convert.ToInt32(TextBox3.Text) / 35) + (Convert.ToInt32(TextBox4.Text) / 25) + (Convert.ToInt32(TextBox5.Text))).ToString();
+                MessageBox.Show(ResultAll, "result");
+            }
         }
     }
 }

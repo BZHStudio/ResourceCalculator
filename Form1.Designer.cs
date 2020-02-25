@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -59,6 +60,8 @@
             this.LabelResult3 = new System.Windows.Forms.Label();
             this.LabelResult2 = new System.Windows.Forms.Label();
             this.ButtonClean = new System.Windows.Forms.Button();
+            this.ButtonAllResult = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,7 +132,6 @@
             this.TextBox1.Name = "TextBox1";
             this.TextBox1.Size = new System.Drawing.Size(187, 20);
             this.TextBox1.TabIndex = 6;
-            this.TextBox1.Text = "7521";
             // 
             // TextBox2
             // 
@@ -137,7 +139,6 @@
             this.TextBox2.Name = "TextBox2";
             this.TextBox2.Size = new System.Drawing.Size(187, 20);
             this.TextBox2.TabIndex = 7;
-            this.TextBox2.Text = "11360";
             // 
             // TextBox3
             // 
@@ -145,7 +146,6 @@
             this.TextBox3.Name = "TextBox3";
             this.TextBox3.Size = new System.Drawing.Size(187, 20);
             this.TextBox3.TabIndex = 8;
-            this.TextBox3.Text = "11468";
             // 
             // TextBox4
             // 
@@ -153,7 +153,6 @@
             this.TextBox4.Name = "TextBox4";
             this.TextBox4.Size = new System.Drawing.Size(187, 20);
             this.TextBox4.TabIndex = 9;
-            this.TextBox4.Text = "805";
             // 
             // TextBox5
             // 
@@ -161,7 +160,6 @@
             this.TextBox5.Name = "TextBox5";
             this.TextBox5.Size = new System.Drawing.Size(187, 20);
             this.TextBox5.TabIndex = 10;
-            this.TextBox5.Text = "66";
             // 
             // LabelPaluch5
             // 
@@ -169,9 +167,9 @@
             this.LabelPaluch5.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.LabelPaluch5.Location = new System.Drawing.Point(358, 243);
             this.LabelPaluch5.Name = "LabelPaluch5";
-            this.LabelPaluch5.Size = new System.Drawing.Size(92, 21);
+            this.LabelPaluch5.Size = new System.Drawing.Size(94, 21);
             this.LabelPaluch5.TabIndex = 15;
-            this.LabelPaluch5.Text = "Получится: ";
+            this.LabelPaluch5.Text = "Получим 5: ";
             // 
             // LabelPaluch4
             // 
@@ -179,9 +177,9 @@
             this.LabelPaluch4.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.LabelPaluch4.Location = new System.Drawing.Point(357, 202);
             this.LabelPaluch4.Name = "LabelPaluch4";
-            this.LabelPaluch4.Size = new System.Drawing.Size(92, 21);
+            this.LabelPaluch4.Size = new System.Drawing.Size(95, 21);
             this.LabelPaluch4.TabIndex = 14;
-            this.LabelPaluch4.Text = "Получится: ";
+            this.LabelPaluch4.Text = "Получим 4: ";
             // 
             // LabelPaluch3
             // 
@@ -189,9 +187,9 @@
             this.LabelPaluch3.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.LabelPaluch3.Location = new System.Drawing.Point(357, 161);
             this.LabelPaluch3.Name = "LabelPaluch3";
-            this.LabelPaluch3.Size = new System.Drawing.Size(92, 21);
+            this.LabelPaluch3.Size = new System.Drawing.Size(94, 21);
             this.LabelPaluch3.TabIndex = 13;
-            this.LabelPaluch3.Text = "Получится: ";
+            this.LabelPaluch3.Text = "Получим 3: ";
             // 
             // LabelPaluch2
             // 
@@ -199,9 +197,9 @@
             this.LabelPaluch2.Font = new System.Drawing.Font("Segoe UI Semilight", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.LabelPaluch2.Location = new System.Drawing.Point(357, 117);
             this.LabelPaluch2.Name = "LabelPaluch2";
-            this.LabelPaluch2.Size = new System.Drawing.Size(92, 21);
+            this.LabelPaluch2.Size = new System.Drawing.Size(94, 21);
             this.LabelPaluch2.TabIndex = 12;
-            this.LabelPaluch2.Text = "Получится: ";
+            this.LabelPaluch2.Text = "Получим 2: ";
             // 
             // menuStrip1
             // 
@@ -358,11 +356,24 @@
             this.ButtonClean.UseVisualStyleBackColor = true;
             this.ButtonClean.Click += new System.EventHandler(this.ButtonClean_Click);
             // 
+            // ButtonAllResult
+            // 
+            this.ButtonAllResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ButtonAllResult.Location = new System.Drawing.Point(617, 71);
+            this.ButtonAllResult.Name = "ButtonAllResult";
+            this.ButtonAllResult.Size = new System.Drawing.Size(107, 24);
+            this.ButtonAllResult.TabIndex = 26;
+            this.ButtonAllResult.Text = "button All";
+            this.toolTip1.SetToolTip(this.ButtonAllResult, "Подсчитать все ресурсы");
+            this.ButtonAllResult.UseVisualStyleBackColor = true;
+            this.ButtonAllResult.Click += new System.EventHandler(this.ButtonAllResult_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 352);
+            this.Controls.Add(this.ButtonAllResult);
             this.Controls.Add(this.ButtonClean);
             this.Controls.Add(this.LabelResult5);
             this.Controls.Add(this.LabelResult4);
@@ -434,6 +445,8 @@
         private System.Windows.Forms.Label LabelResult3;
         private System.Windows.Forms.Label LabelResult2;
         private System.Windows.Forms.Button ButtonClean;
+        private System.Windows.Forms.Button ButtonAllResult;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

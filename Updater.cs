@@ -19,16 +19,18 @@ namespace ResourceCalculator
             InitializeComponent();
         }
 
+        public static string versionProg = Application.ProductVersion;
+
         private void Button1_Click(object sender, EventArgs e)
         {
             File.Move("ResourceCalculator.exe", "ResourceCalculatorOldVersion.exe");
 
-            string url = "http://atas.kl.com.ua/updater/ResourceCalculator.exe";
-
             using (WebClient wc = new WebClient())
             {
-                // var urlget wc.DownloadString();
-               // urlget.Contains(cont);
+
+            var Preurl = wc.DownloadString("https://raw.githubusercontent.com/BZHStudio/ResourceCalculator/master/url.txt");
+
+              string url = Preurl.ToString();
 
                 wc.OpenRead(url);
                // string size = (Convert.ToDouble(wc.ResponseHeaders["Content-Length"]) / 1048576).ToString("#.# МБ");

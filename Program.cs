@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,7 +18,30 @@ namespace ResourceCalculator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            Process pr = RI();
+            if (pr != null)
+                MessageBox.Show("Приложение уже запущено!", "Приложение запущено");
+            else
+
             Application.Run(new Form1());
+        }
+
+        private static Process RI()
+        {
+            Process current = Process.GetCurrentProcess();
+            Process[] pr = Process.GetProcessesByName(current.ProcessName);
+            foreach (Process i in pr)
+            {
+                if (i.Id != current.Id)
+                {
+                    if (Assembly.GetExecutingAssembly().Location.Replace("/", "\\") == current.MainModule.FileName)
+                    {
+                        return i;
+                    }
+                }
+            }
+            return null;
         }
     }
 }
