@@ -358,12 +358,12 @@
             // 
             // ButtonAllResult
             // 
-            this.ButtonAllResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ButtonAllResult.Location = new System.Drawing.Point(617, 71);
+            this.ButtonAllResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ButtonAllResult.Location = new System.Drawing.Point(596, 71);
             this.ButtonAllResult.Name = "ButtonAllResult";
-            this.ButtonAllResult.Size = new System.Drawing.Size(107, 24);
+            this.ButtonAllResult.Size = new System.Drawing.Size(128, 24);
             this.ButtonAllResult.TabIndex = 26;
-            this.ButtonAllResult.Text = "button All";
+            this.ButtonAllResult.Text = "Перевести в 5";
             this.toolTip1.SetToolTip(this.ButtonAllResult, "Подсчитать все ресурсы");
             this.ButtonAllResult.UseVisualStyleBackColor = true;
             this.ButtonAllResult.Click += new System.EventHandler(this.ButtonAllResult_Click);

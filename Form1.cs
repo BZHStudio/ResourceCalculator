@@ -229,10 +229,22 @@ namespace ResourceCalculator
         {
             if (TextBox1.Text == "" || TextBox2.Text == "" || TextBox3.Text == "" || TextBox4.Text == "" || TextBox5.Text == "") {
                 MessageBox.Show("Заполните все поля!", "Поля не заполнены");
+            } else if (LabelResult2.Text == "" || LabelResult3.Text == "" || LabelResult4.Text == "" || LabelResult5.Text == "") {
+                MessageBox.Show("Вы не подсчитали ресурсы!", "Ошибка");
             } else
             {
-                var ResultAll = ((Convert.ToInt32(TextBox1.Text) / 50) + (Convert.ToInt32(TextBox2.Text) / 50) + (Convert.ToInt32(TextBox3.Text) / 35) + (Convert.ToInt32(TextBox4.Text) / 25) + (Convert.ToInt32(TextBox5.Text))).ToString();
-                MessageBox.Show(ResultAll, "result");
+
+                var tb2 = (Convert.ToInt32(LabelResult2.Text) / 50);
+                var tb3 = (Convert.ToInt32(LabelResult3.Text) / 35);
+                var tb4 = (Convert.ToInt32(LabelResult4.Text) / 25);
+                var tb5 = (Convert.ToInt32(LabelResult5.Text));
+
+
+                var ResultAll = tb2 + tb3 + tb4 + tb5;
+
+
+                // var ResultAll = ((Convert.ToInt32(TextBox1.Text) / 50) + (Convert.ToInt32(TextBox2.Text) / 50) + (Convert.ToInt32(TextBox3.Text) / 35) + (Convert.ToInt32(TextBox4.Text) / 25) + (Convert.ToInt32(TextBox5.Text))).ToString();
+                MessageBox.Show("Если все ресурсы перевести в 5 получите : " + " " + ResultAll, "result").ToString();
             }
         }
     }
