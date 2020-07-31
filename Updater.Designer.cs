@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.ButtonUpdate = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // progressBar1
@@ -42,9 +44,10 @@
             // 
             // ButtonUpdate
             // 
-            this.ButtonUpdate.Location = new System.Drawing.Point(193, 176);
+            this.ButtonUpdate.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.ButtonUpdate.Location = new System.Drawing.Point(195, 175);
             this.ButtonUpdate.Name = "ButtonUpdate";
-            this.ButtonUpdate.Size = new System.Drawing.Size(175, 29);
+            this.ButtonUpdate.Size = new System.Drawing.Size(177, 31);
             this.ButtonUpdate.TabIndex = 1;
             this.ButtonUpdate.Text = "Обновить";
             this.ButtonUpdate.UseVisualStyleBackColor = true;
@@ -59,6 +62,11 @@
             this.label1.Size = new System.Drawing.Size(0, 21);
             this.label1.TabIndex = 2;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Updater
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -71,7 +79,7 @@
             this.MaximizeBox = false;
             this.Name = "Updater";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Updater";
+            this.Text = "Обновление";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -82,5 +90,6 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button ButtonUpdate;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

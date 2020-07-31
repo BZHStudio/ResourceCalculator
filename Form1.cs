@@ -16,6 +16,12 @@ namespace ResourceCalculator
 {
     public partial class Form1 : Form
     {
+        public static string versionProg = Application.ProductVersion;
+        public static string urlProg = "https://raw.githubusercontent.com/BZHStudio/ResourceCalculator/master/version.txt";
+        /*string versurl = File.ReadAllText(urlProg);*/
+            
+        WebClient wc = new WebClient();
+
         public Form1()
         {
             InitializeComponent();
@@ -43,6 +49,17 @@ namespace ResourceCalculator
                 LabelResult3.ForeColor = Color.FromArgb(255, 245, 245, 245);
                 LabelResult2.ForeColor = Color.FromArgb(255, 245, 245, 245);
 
+                TextBox1.ForeColor = Color.FromArgb(255, 245, 245, 245);
+                TextBox1.BackColor = Color.FromArgb(255, 29, 29, 29);
+                TextBox2.ForeColor = Color.FromArgb(255, 245, 245, 245);
+                TextBox2.BackColor = Color.FromArgb(255, 29, 29, 29);
+                TextBox3.ForeColor = Color.FromArgb(255, 245, 245, 245);
+                TextBox3.BackColor = Color.FromArgb(255, 29, 29, 29);
+                TextBox4.ForeColor = Color.FromArgb(255, 245, 245, 245);
+                TextBox4.BackColor = Color.FromArgb(255, 29, 29, 29);
+                TextBox5.ForeColor = Color.FromArgb(255, 245, 245, 245);
+                TextBox5.BackColor = Color.FromArgb(255, 29, 29, 29);
+
                 Button1.BackColor = Color.FromArgb(255, 29, 29, 29);
                 Button1.ForeColor = Color.FromArgb(255, 255, 255, 255);
                 ButtonClean.BackColor = Color.FromArgb(255, 29, 29, 29);
@@ -53,10 +70,16 @@ namespace ResourceCalculator
                 ComboBox1.BackColor = Color.FromArgb(255, 29, 29, 29);
                 ComboBox1.ForeColor = Color.FromArgb(255, 245, 245, 245);
 
+                checkBoxSave.ForeColor = SystemColors.Control;
+
                 menuStrip1.BackColor = Color.FromArgb(255, 29, 29, 29);
                 настройкиToolStripMenuItem.ForeColor = Color.FromArgb(255, 245, 245, 245);
-             // настройкиToolStripMenuItem.BackColor = Color.FromArgb(255, 29, 29, 29);
+                настройкиToolStripMenuItem.BackColor = Color.FromArgb(255, 29, 29, 29);
                 ОпрограммеToolStripMenuItem.ForeColor = Color.FromArgb(255, 245, 245, 245);
+                темыToolStripMenuItem.ForeColor = Color.FromArgb(255, 29, 29, 29);
+                темнаяToolStripMenuItem.ForeColor = Color.FromArgb(255, 29, 29, 29);
+                светлаяToolStripMenuItem.ForeColor = Color.FromArgb(255, 29, 29, 29);
+                проверитьОбновленияToolStripMenuItem.ForeColor = Color.FromArgb(255, 29, 29, 29);
             }
             else
             {
@@ -79,9 +102,15 @@ namespace ResourceCalculator
                 ButtonAllResult.BackColor = SystemColors.Control;
                 ButtonAllResult.ForeColor = SystemColors.ControlText;
 
+                checkBoxSave.ForeColor = SystemColors.ControlText;
+
                 menuStrip1.BackColor = SystemColors.Control;
                 настройкиToolStripMenuItem.ForeColor = SystemColors.ControlText;
                 ОпрограммеToolStripMenuItem.ForeColor = SystemColors.ControlText;
+                темыToolStripMenuItem.ForeColor = Color.FromArgb(255, 0, 0, 0);
+                темнаяToolStripMenuItem.ForeColor = Color.FromArgb(255, 0, 0, 0);
+                светлаяToolStripMenuItem.ForeColor = Color.FromArgb(255, 0, 0, 0);
+                проверитьОбновленияToolStripMenuItem.ForeColor = Color.FromArgb(255, 0, 0, 0);
             }
 
             if (File.Exists("ResourceCalculatorOldVersion.exe"))
@@ -91,12 +120,42 @@ namespace ResourceCalculator
             }
             else
             {
-              // MessageBox.Show("Файл не найден!");
+                // MessageBox.Show("Файл не найден!");
+
             }
+
+            using (RegistryKey keySave = Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator"))
+                TextBox1.Text = keySave?.GetValue("Savecfg1").ToString();
+            using (RegistryKey keySave = Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator"))
+                TextBox2.Text = keySave?.GetValue("Savecfg2").ToString();
+            using (RegistryKey keySave = Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator"))
+                TextBox3.Text = keySave?.GetValue("Savecfg3").ToString();
+            using (RegistryKey keySave = Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator"))
+                TextBox4.Text = keySave?.GetValue("Savecfg4").ToString();
+            using (RegistryKey keySave = Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator"))
+                TextBox5.Text = keySave?.GetValue("Savecfg5").ToString();
 
         }
 
-        public static string versionProg = Application.ProductVersion;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            var UiTest = wc.DownloadString(urlProg);
+
+            if (UiTest.Contains(versionProg))
+            {
+                /*MessageBox.Show("У вас установлена последняя версия программы!", "Обновления не найдены", MessageBoxButtons.OK, MessageBoxIcon.Information);*/
+            }
+            else
+            {
+                if (MessageBox.Show("Текущая версия программы " + versionProg + "\nНовое обновление доступно " + UiTest + "\n\nТребуется обновление.\nОбновить программу до актуальной версии?", "Найдено новое обновление!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Updater upd = new Updater();
+
+                    upd.ShowDialog();
+                }
+            }
+
+        }
 
         private void ОпрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -107,30 +166,44 @@ namespace ResourceCalculator
 
         private void темнаяToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator").SetValue("DarkMode", "true");
-            checkBoxDarkMode.Checked = true;
-            Application.Restart();
+            if (checkBoxDarkMode.Checked == true)
+            {
+
+            }
+            else
+            {
+                Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator").SetValue("DarkMode", "true");
+                checkBoxDarkMode.Checked = true;
+                Application.Restart();
+            }
+            
         }
 
         private void светлаяToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator").SetValue("DarkMode", "false");
-            checkBoxDarkMode.Checked = false;
-            Application.Restart();
+            if (checkBoxDarkMode.Checked == false)
+            {
+
+            }
+            else
+            {
+                Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator").SetValue("DarkMode", "false");
+                checkBoxDarkMode.Checked = false;
+                Application.Restart();
+            }
+
         }
         
         private void проверитьОбновленияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WebClient wc = new WebClient();
-
-            var Ui = wc.DownloadString("https://raw.githubusercontent.com/BZHStudio/ResourceCalculator/master/version.txt");
+            var Ui = wc.DownloadString(urlProg);
             if (Ui.Contains(versionProg))
             {
                 MessageBox.Show("У вас установлена последняя версия программы!", "Обновления не найдены", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                if (MessageBox.Show("Новое обновление доступно " + Ui + " хотите обновить?", "Найдено новое обновление", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (MessageBox.Show("Текущая версия программы " + versionProg + "\nНовое обновление доступно " + Ui + "\n\nТребуется обновление.\nОбновить программу до актуальной версии?", "Найдено новое обновление!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     Updater upd = new Updater();
 
@@ -223,6 +296,11 @@ namespace ResourceCalculator
             TextBox3.Text = null;
             TextBox4.Text = null;
             TextBox5.Text = null;
+
+            LabelResult2.Text = null;
+            LabelResult3.Text = null;
+            LabelResult4.Text = null;
+            LabelResult5.Text = null;
         }
 
         private void ButtonAllResult_Click(object sender, EventArgs e)
@@ -246,6 +324,28 @@ namespace ResourceCalculator
                 // var ResultAll = ((Convert.ToInt32(TextBox1.Text) / 50) + (Convert.ToInt32(TextBox2.Text) / 50) + (Convert.ToInt32(TextBox3.Text) / 35) + (Convert.ToInt32(TextBox4.Text) / 25) + (Convert.ToInt32(TextBox5.Text))).ToString();
                 MessageBox.Show("Если все ресурсы перевести в 5 получите : " + " " + ResultAll, "result").ToString();
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form fru = new Updater();
+            fru.ShowDialog();
+        }
+
+        private void checkBoxSave_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxSave.Checked == true)
+            {
+                checkBoxSave.Checked = true;
+
+                Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator").SetValue("Savecfg1", TextBox1.Text);
+                Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator").SetValue("Savecfg2", TextBox2.Text);
+                Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator").SetValue("Savecfg3", TextBox3.Text);
+                Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator").SetValue("Savecfg4", TextBox4.Text);
+                Registry.CurrentUser.CreateSubKey(@"Software\ResourceCalculator").SetValue("Savecfg5", TextBox5.Text);
+            }
+
+
         }
     }
 }

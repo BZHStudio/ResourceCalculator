@@ -62,6 +62,7 @@
             this.ButtonClean = new System.Windows.Forms.Button();
             this.ButtonAllResult = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.checkBoxSave = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,7 +129,7 @@
             // TextBox1
             // 
             this.TextBox1.Location = new System.Drawing.Point(140, 74);
-            this.TextBox1.MaxLength = 25;
+            this.TextBox1.MaxLength = 10;
             this.TextBox1.Name = "TextBox1";
             this.TextBox1.Size = new System.Drawing.Size(187, 20);
             this.TextBox1.TabIndex = 6;
@@ -136,6 +137,7 @@
             // TextBox2
             // 
             this.TextBox2.Location = new System.Drawing.Point(140, 120);
+            this.TextBox2.MaxLength = 10;
             this.TextBox2.Name = "TextBox2";
             this.TextBox2.Size = new System.Drawing.Size(187, 20);
             this.TextBox2.TabIndex = 7;
@@ -143,6 +145,7 @@
             // TextBox3
             // 
             this.TextBox3.Location = new System.Drawing.Point(140, 164);
+            this.TextBox3.MaxLength = 10;
             this.TextBox3.Name = "TextBox3";
             this.TextBox3.Size = new System.Drawing.Size(187, 20);
             this.TextBox3.TabIndex = 8;
@@ -150,6 +153,7 @@
             // TextBox4
             // 
             this.TextBox4.Location = new System.Drawing.Point(140, 205);
+            this.TextBox4.MaxLength = 10;
             this.TextBox4.Name = "TextBox4";
             this.TextBox4.Size = new System.Drawing.Size(187, 20);
             this.TextBox4.TabIndex = 9;
@@ -157,6 +161,7 @@
             // TextBox5
             // 
             this.TextBox5.Location = new System.Drawing.Point(140, 246);
+            this.TextBox5.MaxLength = 10;
             this.TextBox5.Name = "TextBox5";
             this.TextBox5.Size = new System.Drawing.Size(187, 20);
             this.TextBox5.TabIndex = 10;
@@ -273,7 +278,7 @@
             // checkBoxDarkMode
             // 
             this.checkBoxDarkMode.AutoSize = true;
-            this.checkBoxDarkMode.Location = new System.Drawing.Point(651, 324);
+            this.checkBoxDarkMode.Location = new System.Drawing.Point(651, 249);
             this.checkBoxDarkMode.Name = "checkBoxDarkMode";
             this.checkBoxDarkMode.Size = new System.Drawing.Size(73, 17);
             this.checkBoxDarkMode.TabIndex = 18;
@@ -287,9 +292,9 @@
             this.ComboBox1.FormattingEnabled = true;
             this.ComboBox1.Items.AddRange(new object[] {
             "1 -> 2",
-            "1 -> 3",
-            "1 -> 4",
-            "1 -> 5"});
+            "1 -> 3 [ beta ]",
+            "1 -> 4 [ beta ]",
+            "1 -> 5 [ beta ]"});
             this.ComboBox1.Location = new System.Drawing.Point(460, 74);
             this.ComboBox1.Name = "ComboBox1";
             this.ComboBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -368,11 +373,23 @@
             this.ButtonAllResult.UseVisualStyleBackColor = true;
             this.ButtonAllResult.Click += new System.EventHandler(this.ButtonAllResult_Click);
             // 
+            // checkBoxSave
+            // 
+            this.checkBoxSave.AutoSize = true;
+            this.checkBoxSave.Location = new System.Drawing.Point(595, 323);
+            this.checkBoxSave.Name = "checkBoxSave";
+            this.checkBoxSave.Size = new System.Drawing.Size(129, 17);
+            this.checkBoxSave.TabIndex = 28;
+            this.checkBoxSave.Text = "Сохранить значения";
+            this.checkBoxSave.UseVisualStyleBackColor = true;
+            this.checkBoxSave.CheckedChanged += new System.EventHandler(this.checkBoxSave_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 352);
+            this.Controls.Add(this.checkBoxSave);
             this.Controls.Add(this.ButtonAllResult);
             this.Controls.Add(this.ButtonClean);
             this.Controls.Add(this.LabelResult5);
@@ -405,6 +422,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Калькулятор ресурсов";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -447,6 +465,7 @@
         private System.Windows.Forms.Button ButtonClean;
         private System.Windows.Forms.Button ButtonAllResult;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.CheckBox checkBoxSave;
     }
 }
 
