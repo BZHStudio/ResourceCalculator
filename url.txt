@@ -1,1 +1,1 @@
-https://github.com/BZHStudio/ResourceCalculator/releases/download/1.0.1.0/ResourceCalculator.exe
+https://github.com/BZHStudio/ResourceCalculator/releases/download/1.0.2.0/ResourceCalculator.exe
